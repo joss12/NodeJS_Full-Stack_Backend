@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 
 const userRouter = require('../router/userRouter');
+const {connect} = require('../db/dbConfig');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
   next(error);
 });
 
+
+//Error Handling
 app.use((error, req, res, next) => {
   res.status(error.status || 500).json({
     error: {
@@ -30,6 +33,8 @@ app.use((error, req, res, next) => {
     },
   });
 });
+
+connect();
 
 
 module.exports = app;
