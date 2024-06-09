@@ -4,13 +4,14 @@ const User = require("../models/userModels");
 
 const connect = async () => {
   await mongoose
-    .connect(process.env.mongo)
-    .then(() => {
-      console.log("->Database  Successfully Connected");
-    })
-    .catch((err) => {
-      console.log("->Database Connection Failed", err.stack);
-    });
+  .connect(process.env.mongo)
+  .then(() => {
+    console.log("->Database Successfully Connected");
+  })
+  .catch((err) => {
+    console.log("->Database Connection Failed", err.stack);
+  });
+  mongoose.set('strictQuery', true);
 };
 
 const disconnect = async () => {
@@ -18,11 +19,11 @@ const disconnect = async () => {
 };
 
 const findUser = async (obj) => {
-  User.findOne(obj);
+  return User.findOne(obj);
 };
 
 const saveUser = async (newUser) => {
-  return await newUser.Save();
+  return await newUser.save();
 };
 
 module.exports = {
