@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-const userRouter = require('../router/userRouter');
+const AppRouter = require('../router/index');
 const {connect} = require('../db/dbConfig');
 
 app.use(express.json());
@@ -10,12 +10,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-app.get("/", (req, res, next) => {
-  res.status(200).json({ message: "Service is running" });
-});
+// app.get("/", (req, res, next) => {
+//   res.status(200).json({ message: "Service is running" });
+// });
 
 //routes
-app.use('/users', userRouter)
+app.use('/', AppRouter)
 
 app.use((req, res, next) => {
   const error = new Error("Not Found");
